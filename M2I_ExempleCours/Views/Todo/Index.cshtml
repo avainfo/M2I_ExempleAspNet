@@ -1,0 +1,28 @@
+﻿@model List<Todo>
+@{
+    ViewData["Title"] = "Todo List";
+}
+
+<h1>Todo List</h1>
+
+<form asp-action="AddTask" asp-controller="Todo">
+    <label for="title"></label>
+    <input type="text" name="title" id="title">
+    <button type="submit">Ajouter une tache</button>
+</form>
+
+<ul>
+    @foreach (Todo task in Model)
+    {
+        <li style="display: flex; flex-direction: row">
+            @task.Title
+            @if (task.Completed == false)
+            {
+                <form asp-action="CompleteTask" asp-controller="Todo">
+                    <input hidden="hidden" name="id" value="@task.Id"/>
+                    <button>Compléter la tache</button>
+                </form>
+            }
+        </li>
+    }
+</ul>
