@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using M2I_ExempleCours.Data;
+using M2I_ExempleCours.repository;
+using M2I_ExempleCours.services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(
 	)
 );
 
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
 var app = builder.Build();
 
 // Appliquer les migrations et remplir la BDD si vide
@@ -23,7 +27,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configuration d'une route pour tester
-app.MapGet("/students", async (AppDbContext db) => await db.Students.ToListAsync());
+// app.MapGet("/students", async (AppDbContext db) => await db.Students.ToListAsync());
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
