@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace M2I_ExempleCours.services;
 
-public class StudentRepository(AppDbContext context) : IStudentRepository
+public class TestRepo(AppDbContext context) : IStudentRepository
 {
 	public Task<List<Student>> GetAllStudentsAsync()
 	{
